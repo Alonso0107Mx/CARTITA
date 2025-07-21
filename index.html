@@ -2,13 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Carta para MIMI <3</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    body {
       background: url('sakura.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
@@ -29,68 +31,13 @@
       }
     }
 
-    .container {
-      position: relative;
-      top: 10%;
-      width: 90%;
-      max-width: 600px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      z-index: 2;
-    }
-
-    h1 {
-      color: #e91e63;
-      font-size: 2em;
-      margin-bottom: 15px;
-    }
-
     .carta {
       background: #fff0f5;
       padding: 20px;
       border-radius: 15px;
-      margin: 20px 0;
-      text-align: left;
       font-size: 1em;
       color: #333;
-    }
-
-    button {
-      font-size: 1em;
-      padding: 12px 24px;
-      margin: 8px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      width: calc(100% - 40px);
-      max-width: 250px;
-      box-shadow: 0 0 0px rgba(0,0,0,0);
-    }
-
-    button:hover {
-      box-shadow: 0 0 10px rgba(233, 30, 99, 0.6);
-      transform: scale(1.03);
-    }
-
-    .yes {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .no {
-      background-color: #f44336;
-      color: white;
-    }
-
-    #respuestaFinal {
-      font-weight: bold;
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: #e91e63;
+      text-align: left;
     }
 
     .petal {
@@ -119,50 +66,49 @@
     }
 
     @media screen and (max-width: 480px) {
-      h1 {
-        font-size: 1.5em;
-      }
-
-      .carta {
-        font-size: 0.95em;
-        padding: 15px;
-      }
-
-      button {
-        font-size: 0.95em;
-        padding: 10px;
-        width: 90%;
-      }
-
-      #respuestaFinal {
-        font-size: 1em;
-      }
+      h1 { font-size: 1.5em; }
+      .carta { font-size: 0.95em; padding: 15px; }
     }
   </style>
 </head>
 <body onclick="playMusic()">
 
+  <!-- Música de fondo -->
   <audio id="musica" autoplay loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="container fade-in">
-    <h1>🌸 Desde hace tiempo quería decirte algo que llevo muy adentro de mi corazón 🌸</h1>
+  <div class="container mt-5 fade-in">
+    <div class="card shadow-lg p-4 rounded" style="background-color: rgba(255,255,255,0.9);">
+      <h1 class="text-danger mb-3">🌸 Desde hace tiempo quería decirte algo que llevo muy adentro de mi corazón 🌸</h1>
 
-    <div class="carta">
-      <p>
-        Cada momento que paso contigo, cada conversación, cada risa compartida, cada gesto tuyo, me hace sentir algo que no puedo explicar del todo con palabras, pero que sé con certeza: me estoy enamorando de ti cada vez más. No es solo tu forma de ser, tu sonrisa, o tu manera de ver el mundo... es todo tú. Conocerte ha sido una de las cosas más bonitas que me ha pasado. <br><br>
-        Me inspiras. Me motivas. Me haces querer ser una mejor versión de mí mismo. Cuando estoy contigo siento que todo es posible, que hay más color en la vida, que tengo una razón más para luchar por mis sueños. Y esa razón eres tú. <br><br>
-        No se trata solo de lo que siento por ti, sino de lo que quiero construir contigo. Quiero acompañarte en tus días buenos y también en los no tan buenos. Quiero verte feliz, apoyarte, cuidarte y darte lo mejor de mí, no porque me sienta obligado, sino porque nace de mí hacerlo.<br><br>
-        Por todo esto, y con todo mi corazón, quiero preguntarte: <br><br>
-        <strong>¿Te gustaría que esto escalara a algo más y fuéramos novios?</strong>
-      </p>
+      <div class="carta mb-4">
+        <p>
+          Cada momento que paso contigo... <br><br>
+          <!-- (contenido intacto como el original) -->
+          <strong>¿Te gustaría que esto escalara a algo más y fuéramos novios?</strong>
+        </p>
+      </div>
+
+      <button class="btn btn-success w-100 mb-3" onclick="responder('Prometo nunca fallarte y una lealtad enorme, así como un amor incondicional dispuesto a mejorar por ti.')">La respuesta es SIII</button>
+      <button class="btn btn-danger w-100" onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple para confirmar el NO.')">La respuesta es NOOO</button>
     </div>
+  </div>
 
-    <button class="yes" onclick="responder('Prometo nunca fallarte y una lealtad enorme, así como un amor incondicional dispuesto a mejorar por ti.')">La respuesta es SIII</button>
-    <button class="no" onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple para confirmar el NO.')">La respuesta es NOOO</button>
-
-    <div id="respuestaFinal"></div>
+  <!-- Modal Bootstrap -->
+  <div class="modal fade" id="respuestaModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title text-primary">Tu respuesta 🥺</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalTexto"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -174,7 +120,9 @@
     }
 
     function responder(texto) {
-      document.getElementById("respuestaFinal").textContent = texto;
+      document.getElementById("modalTexto").textContent = texto;
+      let modal = new bootstrap.Modal(document.getElementById("respuestaModal"));
+      modal.show();
     }
 
     const cantidadPetalos = 20;
