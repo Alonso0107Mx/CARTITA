@@ -6,17 +6,11 @@
   <title>Carta para MIMI <3</title>
 
   <!-- Bootstrap 5 -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Animate.css -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <style>
     body {
@@ -49,6 +43,31 @@
       text-align: left;
     }
 
+    /* Máquina de escribir por párrafo */
+    .typewriter p {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: .15em solid #e91e63;
+      animation: typing 5s steps(100, end), blink-caret 0.75s step-end infinite;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .typewriter p:nth-child(2) { animation-delay: 5.5s; }
+    .typewriter p:nth-child(3) { animation-delay: 11s; }
+    .typewriter p:nth-child(4) { animation-delay: 16.5s; }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #e91e63 }
+    }
+
+    /* Pétalos flotantes */
     .petal {
       position: fixed;
       top: -50px;
@@ -64,14 +83,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
     .modal-content.animate__animated {
@@ -80,7 +93,8 @@
   </style>
 </head>
 <body onclick="playMusic()">
-  <!-- Música de fondo -->
+
+  <!-- Música con controles -->
   <div class="container mt-3">
     <label class="form-label text-light">🌸 Música que me recuerda a ti:</label>
     <audio id="musica" controls class="w-100 rounded border">
@@ -90,102 +104,66 @@
 
   <!-- Carta principal -->
   <div class="container mt-4 fade-in">
-    <div
-      class="card shadow-lg p-4 rounded"
-      style="background-color: rgba(255, 255, 255, 0.9)"
-    >
+    <div class="card shadow-lg p-4 rounded" style="background-color: rgba(255, 255, 255, 0.9)">
       <h1 class="text-danger mb-3 animate__animated animate__heartBeat">
         🌸 Desde hace tiempo quería decirte algo... 🌸
       </h1>
 
-      <div class="carta text-start">
-        <p class="animate__animated animate__fadeInUp animate__delay-1s">
-          Cada momento que paso contigo, cada conversación, cada risa
-          compartida, cada gesto tuyo, me hace sentir algo que no puedo
-          explicar del todo con palabras, pero que sé con certeza: me estoy
-          enamorando de ti cada vez más. No es solo tu forma de ser, tu sonrisa,
-          o tu manera de ver el mundo... es todo tú. Conocerte ha sido una de
-          las cosas más bonitas que me ha pasado.
+      <div class="carta text-start typewriter">
+        <p>
+          Cada momento que paso contigo, cada conversación, cada risa compartida, cada gesto tuyo, me hace sentir algo que no puedo explicar del todo con palabras, pero que sé con certeza: me estoy enamorando de ti cada vez más. No es solo tu forma de ser, tu sonrisa, o tu manera de ver el mundo... es todo tú. Conocerte ha sido una de las cosas más bonitas que me ha pasado.
         </p>
-        <p class="animate__animated animate__fadeInUp animate__delay-2s">
-          Me inspiras. Me motivas. Me haces querer ser una mejor versión de mí
-          mismo. Cuando estoy contigo siento que todo es posible, que hay más
-          color en la vida, que tengo una razón más para luchar por mis sueños.
-          Y esa razón eres tú.
+        <p>
+          Me inspiras. Me motivas. Me haces querer ser una mejor versión de mí mismo. Cuando estoy contigo siento que todo es posible, que hay más color en la vida, que tengo una razón más para luchar por mis sueños. Y esa razón eres tú.
         </p>
-        <p class="animate__animated animate__fadeInUp animate__delay-3s">
-          No se trata solo de lo que siento por ti, sino de lo que quiero
-          construir contigo. Quiero acompañarte en tus días buenos y también en
-          los no tan buenos. Quiero verte feliz, apoyarte, cuidarte y darte lo
-          mejor de mí, no porque me sienta obligado, sino porque nace de mí
-          hacerlo.
+        <p>
+          No se trata solo de lo que siento por ti, sino de lo que quiero construir contigo. Quiero acompañarte en tus días buenos y también en los no tan buenos. Quiero verte feliz, apoyarte, cuidarte y darte lo mejor de mí, no porque me sienta obligado, sino porque nace de mí hacerlo.
         </p>
-        <p
-          class="animate__animated animate__fadeInUp animate__delay-4s fw-bold text-danger"
-        >
+        <p class="fw-bold text-danger">
           Por todo esto, y con todo mi corazón, quiero preguntarte:<br />
           ¿Te gustaría que esto escalara a algo más y fuéramos novios?
         </p>
       </div>
 
-      <button
-        class="btn btn-success w-100 mb-3 animate__animated animate__fadeInUp animate__delay-5s"
-        onclick="responder('Prometo nunca fallarte y una lealtad enorme, así como un amor incondicional dispuesto a mejorar por ti.', 'https://media.tenor.com/fJ76eNKqvFMAAAAM/pink-heart.gif')"
-      >
-        La respuesta es SIII
-      </button>
+      <!-- Botones ocultos que aparecen después -->
+      <div id="botones" class="text-center mt-3" style="display: none;">
+        <button class="btn btn-success w-100 mb-3 animate__animated animate__fadeInUp"
+          onclick="responder('Prometo nunca fallarte y una lealtad enorme, así como un amor incondicional dispuesto a mejorar por ti.', 'https://media.tenor.com/fJ76eNKqvFMAAAAM/pink-heart.gif')">
+          La respuesta es SIII
+        </button>
 
-      <button
-        class="btn btn-danger w-100 animate__animated animate__fadeInUp animate__delay-6s"
-        onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple para confirmar el NO.', 'https://media.tenor.com/F5qpZHSg_NwAAAAM/колобокicq.gif')"
-      >
-        La respuesta es NOOO
-      </button>
+        <button class="btn btn-danger w-100 animate__animated animate__fadeInUp"
+          onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple para confirmar el NO.', 'https://media.tenor.com/F5qpZHSg_NwAAAAM/колобокicq.gif')">
+          La respuesta es NOOO
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Modal interactivo -->
-  <div
-    class="modal fade animate__animated animate__fadeInDown"
-    id="respuestaModal"
-    tabindex="-1"
-  >
+  <div class="modal fade animate__animated animate__fadeInDown" id="respuestaModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content animate__animated animate__fadeInUp">
         <div class="modal-header bg-light">
           <h5 class="modal-title text-danger">💌 Tu respuesta</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body text-center">
           <div class="fs-4 mb-3" id="modalTexto"></div>
-          <img
-            id="modalImagen"
-            src=""
-            class="img-fluid rounded d-none"
-            alt="Respuesta emocional"
-          />
+          <img id="modalImagen" src="" class="img-fluid rounded d-none" alt="Respuesta emocional" />
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cerrar
-          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script>
     function playMusic() {
       const music = document.getElementById("musica");
-      music.play().catch((error) => {
+      music.play().catch(error => {
         console.log("Reproducción bloqueada por el navegador:", error);
       });
     }
@@ -198,12 +176,11 @@
       imagenElemento.src = imagenURL;
       imagenElemento.classList.remove("d-none");
 
-      let modal = new bootstrap.Modal(
-        document.getElementById("respuestaModal")
-      );
+      let modal = new bootstrap.Modal(document.getElementById("respuestaModal"));
       modal.show();
     }
 
+    // Pétalos flotantes
     const cantidadPetalos = 20;
     for (let i = 0; i < cantidadPetalos; i++) {
       const petal = document.createElement("div");
@@ -213,6 +190,12 @@
       petal.style.animationDelay = `${Math.random() * 4}s`;
       document.body.appendChild(petal);
     }
+
+    // Mostrar botones después de máquina de escribir
+    setTimeout(() => {
+      const botones = document.getElementById("botones");
+      botones.style.display = "block";
+    }, 22000); // ajusta si cambias tiempo de animación
   </script>
 </body>
 </html>
