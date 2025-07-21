@@ -99,4 +99,94 @@
         </button>
 
         <button class="btn btn-danger w-100 animate__animated animate__fadeInUp"
-          onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple
+          onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple para confirmar el NO.', 'https://media.tenor.com/F5qpZHSg_NwAAAAM/колобокicq.gif')">
+          La respuesta es NOOO
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal interactivo -->
+  <div class="modal fade animate__animated animate__fadeInDown" id="respuestaModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content animate__animated animate__fadeInUp">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title text-danger">💌 Tu respuesta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="fs-4 mb-3" id="modalTexto"></div>
+          <img id="modalImagen" src="" class="img-fluid rounded d-none" alt="Respuesta emocional" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function playMusic() {
+      const music = document.getElementById("musica");
+      music.play().catch(error => {
+        console.log("Reproducción bloqueada por el navegador:", error);
+      });
+    }
+
+    function responder(texto, imagenURL) {
+      const textoElemento = document.getElementById("modalTexto");
+      const imagenElemento = document.getElementById("modalImagen");
+
+      textoElemento.textContent = texto;
+      imagenElemento.src = imagenURL;
+      imagenElemento.classList.remove("d-none");
+
+      let modal = new bootstrap.Modal(document.getElementById("respuestaModal"));
+      modal.show();
+    }
+
+    const textos = [
+      "Cada momento que paso contigo, cada conversación, cada risa compartida, cada gesto tuyo, me hace sentir algo que no puedo explicar del todo con palabras, pero que sé con certeza: me estoy enamorando de ti cada vez más. No es solo tu forma de ser, tu sonrisa, o tu manera de ver el mundo... es todo tú. Conocerte ha sido una de las cosas más bonitas que me ha pasado.",
+      "Me inspiras. Me motivas. Me haces querer ser una mejor versión de mí mismo. Cuando estoy contigo siento que todo es posible, que hay más color en la vida, que tengo una razón más para luchar por mis sueños. Y esa razón eres tú.",
+      "No se trata solo de lo que siento por ti, sino de lo que quiero construir contigo. Quiero acompañarte en tus días buenos y también en los no tan buenos. Quiero verte feliz, apoyarte, cuidarte y darte lo mejor de mí, no porque me sienta obligado, sino porque nace de mí hacerlo.",
+      "Por todo esto, y con todo mi corazón, quiero preguntarte:"
+      "¿Te gustaría que esto escalara a algo más y fuéramos novios?"
+    ];
+
+    function escribirTexto(elementId, texto, delay) {
+      const el = document.getElementById(elementId);
+      let i = 0;
+      setTimeout(() => {
+        const interval = setInterval(() => {
+          el.innerHTML += texto.charAt(i);
+          i++;
+          if (i === texto.length) clearInterval(interval);
+        }, 40);
+      }, delay);
+    }
+
+    escribirTexto("parrafo1", textos[0], 0);
+    escribirTexto("parrafo2", textos[1], 5500);
+    escribirTexto("parrafo3", textos[2], 11000);
+    escribirTexto("parrafo4", textos[3], 16500);
+
+    // Pétalos flotantes
+    const cantidadPetalos = 20;
+    for (let i = 0; i < cantidadPetalos; i++) {
+      const petal = document.createElement("div");
+      petal.classList.add("petal");
+      petal.style.left = `${Math.random() * 100}vw`;
+      petal.style.animationDuration = `${6 + Math.random() * 4}s`;
+      petal.style.animationDelay = `${Math.random() * 4}s`;
+      document.body.appendChild(petal);
+    }
+
+    // Mostrar botones después de máquina de escribir
+    setTimeout(() => {
+      const botones = document.getElementById("botones");
+      botones.style.display = "block";
+    }, 22000);
+  </script>
+</body>
+</html>
