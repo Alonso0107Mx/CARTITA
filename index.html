@@ -13,12 +13,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <style>
+    /* Fondo y estilo general */
     body {
       background: url("sakura.jpg") no-repeat center center fixed;
       background-size: cover;
       font-family: "Segoe UI", sans-serif;
       text-align: center;
       overflow: hidden;
+      opacity: 0; /* Para transición suave */
+      transition: opacity 2s ease-in;
+    }
+    body.mostrar {
+      opacity: 1; /* Se activa cuando inicia la carta */
     }
 
     .fade-in {
@@ -67,9 +73,20 @@
     }
   </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
-  <!-- Música con controles -->
+  <!-- Modal de inicio -->
+  <div class="modal fade" id="inicioModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-4">
+        <h5 class="text-danger mb-3">🌸 Hola, Mimi 🌸</h5>
+        <p class="mb-4">Tengo algo muy especial que decirte. Presiona el botón para comenzar esta aventura emocional 💖</p>
+        <button id="iniciarBtn" class="btn btn-primary">Quiero ver la carta 💌</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Música -->
   <div class="container mt-3">
     <label class="form-label text-light">Música que me recuerda a ti:</label>
     <audio id="musica" controls class="w-100 rounded border">
@@ -91,7 +108,7 @@
         <div id="parrafo4" class="fw-bold text-danger"></div>
       </div>
 
-      <!-- Botones ocultos que aparecen después -->
+      <!-- Botones de respuesta -->
       <div id="botones" class="text-center mt-3" style="display: none;">
         <button class="btn btn-success w-100 mb-3 animate__animated animate__fadeInUp"
           onclick="responder('Prometo nunca fallarte y una lealtad enorme, así como un amor incondicional dispuesto a mejorar por ti.', 'https://media.tenor.com/fJ76eNKqvFMAAAAM/pink-heart.gif')">
@@ -106,7 +123,7 @@
     </div>
   </div>
 
-  <!-- Modal interactivo -->
+  <!-- Modal de respuesta -->
   <div class="modal fade animate__animated animate__fadeInDown" id="respuestaModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content animate__animated animate__fadeInUp">
@@ -127,13 +144,40 @@
 
   <!-- Scripts -->
   <script>
+    // Modal de inicio al cargar
+    window.addEventListener("load", () => {
+      let modalInicio = new bootstrap.Modal(document.getElementById("inicioModal"));
+      modalInicio.show();
+
+      document.getElementById("iniciarBtn").addEventListener("click", () => {
+        modalInicio.hide();
+        document.body.classList.add("mostrar"); // Activa transición de fondo
+        playMusic();                            // Reproduce música con fade
+        iniciarPetalos();                       // Lanza pétalos
+        iniciarCarta();                         // Escribe la carta tipo máquina de escribir
+      });
+    });
+
+    // Reproducción de música con volumen gradual
     function playMusic() {
       const music = document.getElementById("musica");
+      music.volume = 0;
       music.play().catch(error => {
         console.log("Reproducción bloqueada por el navegador:", error);
       });
+
+      let vol = 0;
+      const fade = setInterval(() => {
+        if (vol < 1) {
+          vol += 0.05;
+          music.volume = vol;
+        } else {
+          clearInterval(fade);
+        }
+      }, 150);
     }
 
+    // Mostrar respuesta en modal
     function responder(texto, imagenURL) {
       const textoElemento = document.getElementById("modalTexto");
       const imagenElemento = document.getElementById("modalImagen");
@@ -146,13 +190,15 @@
       modal.show();
     }
 
+    // Contenido de los párrafos
     const textos = [
-      "Cada momento que paso contigo, cada conversación, cada risa compartida, cada gesto tuyo, me hace sentir algo que no puedo explicar del todo con palabras, pero que sé con certeza: me estoy enamorando de ti cada vez más. No es solo tu forma de ser, tu sonrisa, o tu manera de ver el mundo... es todo tú. Conocerte ha sido una de las cosas más bonitas que me ha pasado.",
-      "Me inspiras. Me motivas. Me haces querer ser una mejor versión de mí mismo. Cuando estoy contigo siento que todo es posible, que hay más color en la vida, que tengo una razón más para luchar por mis sueños. Y esa razón eres tú.",
-      "No se trata solo de lo que siento por ti, sino de lo que quiero construir contigo. Quiero acompañarte en tus días buenos y también en los no tan buenos. Quiero verte feliz, apoyarte, cuidarte y darte lo mejor de mí, no porque me sienta obligado, sino porque nace de mí hacerlo.",
-      "Por todo esto, y con todo mi corazón, quiero preguntarte: ¿Te gustaría que esto escalara a algo más y fuéramos novios?"
+      "Cada momento que paso contigo, cada conversación, cada risa compartida, cada gesto tuyo...",
+      "Me inspiras. Me motivas. Me haces querer ser una mejor versión de mí mismo...",
+      "No se trata solo de lo que siento por ti, sino de lo que quiero construir contigo...",
+      "Por todo esto, quiero preguntarte: ¿Te gustaría que esto escalara a algo más y fuéramos novios?"
     ];
 
+    // Escribir párrafos como máquina de escribir
     function escribirTexto(elementId, texto, delay) {
       const el = document.getElementById(elementId);
       let i = 0;
@@ -165,27 +211,13 @@
       }, delay);
     }
 
-    escribirTexto("parrafo1", textos[0], 0);
-    escribirTexto("parrafo2", textos[1], 15100);
-    escribirTexto("parrafo3", textos[2], 24100);
-    escribirTexto("parrafo4", textos[3], 35000);
+    function iniciarCarta() {
+      escribirTexto("parrafo1", textos[0], 0);
+      escribirTexto("parrafo2", textos[1], 15100);
+      escribirTexto("parrafo3", textos[2], 24100);
+      escribirTexto("parrafo4", textos[3], 35000);
 
-    // Pétalos flotantes
-    const cantidadPetalos = 20;
-    for (let i = 0; i < cantidadPetalos; i++) {
-      const petal = document.createElement("div");
-      petal.classList.add("petal");
-      petal.style.left = `${Math.random() * 100}vw`;
-      petal.style.animationDuration = `${6 + Math.random() * 4}s`;
-      petal.style.animationDelay = `${Math.random() * 4}s`;
-      document.body.appendChild(petal);
-    }
-
-    // Mostrar botones después de máquina de escribir
-    setTimeout(() => {
-      const botones = document.getElementById("botones");
-      botones.style.display = "block";
-    }, 38700);
-  </script>
-</body>
-</html>
+      // Mostrar botones al final
+      setTimeout(() => {
+        document.getElementById("botones").style.display = "block";
+      },
