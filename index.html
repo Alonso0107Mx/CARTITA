@@ -80,7 +80,7 @@
   <!-- Carta principal -->
   <div class="container mt-4 fade-in">
     <div class="card shadow-lg p-4 rounded" style="background-color: rgba(255, 255, 255, 0.9)">
-      <h1 class="text-danger mb-3 animate_animated animate_heartBeat">
+      <h1 class="text-danger mb-3 animate__animated animate__heartBeat">
         🌸 Desde hace tiempo quería decirte algo... 🌸
       </h1>
 
@@ -93,12 +93,12 @@
 
       <!-- Botones ocultos que aparecen después -->
       <div id="botones" class="text-center mt-3" style="display: none;">
-        <button class="btn btn-success w-100 mb-3 animate_animated animate_fadeInUp"
+        <button class="btn btn-success w-100 mb-3 animate__animated animate__fadeInUp"
           onclick="responder('Prometo nunca fallarte y una lealtad enorme, así como un amor incondicional dispuesto a mejorar por ti.', 'https://media.tenor.com/fJ76eNKqvFMAAAAM/pink-heart.gif')">
           La respuesta es SIII
         </button>
 
-        <button class="btn btn-danger w-100 animate_animated animate_fadeInUp"
+        <button class="btn btn-danger w-100 animate__animated animate__fadeInUp"
           onclick="responder('Bueno, entonces mándame un video haciendo un mortal triple para confirmar el NO.', 'https://media.tenor.com/F5qpZHSg_NwAAAAM/колобокicq.gif')">
           La respuesta es NOOO
         </button>
@@ -107,9 +107,9 @@
   </div>
 
   <!-- Modal interactivo -->
-  <div class="modal fade animate_animated animate_fadeInDown" id="respuestaModal" tabindex="-1">
+  <div class="modal fade animate__animated animate__fadeInDown" id="respuestaModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content animate_animated animate_fadeInUp">
+      <div class="modal-content animate__animated animate__fadeInUp">
         <div class="modal-header bg-light">
           <h5 class="modal-title text-danger">💌 Tu respuesta</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -170,14 +170,14 @@
     escribirTexto("parrafo3", textos[2], 24100);
     escribirTexto("parrafo4", textos[3], 35000);
 
-    // Pétalos flotantes
+    // 🌸 Pétalos flotantes corregidos
     const cantidadPetalos = 20;
     for (let i = 0; i < cantidadPetalos; i++) {
       const petal = document.createElement("div");
       petal.classList.add("petal");
-      petal.style.left = ${Math.random() * 100}vw;
-      petal.style.animationDuration = ${6 + Math.random() * 4}s;
-      petal.style.animationDelay = ${Math.random() * 4}s;
+      petal.style.left = `${Math.random() * 100}vw`;
+      petal.style.animationDuration = `${6 + Math.random() * 4}s`;
+      petal.style.animationDelay = `${Math.random() * 4}s`;
       document.body.appendChild(petal);
     }
 
